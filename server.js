@@ -8,7 +8,7 @@ var port = process.env.PORT || 8080;
 // immediate abuse (e.g. denial of service). If you want to block all origins except for some,
 // use originWhitelist instead.
 var originBlacklist = parseEnvList(process.env.CORSANYWHERE_BLACKLIST);
-var originWhitelist = parseEnvList(process.env.CORSANYWHERE_WHITELIST);
+var originWhitelist = ["https://myseoulguide.site/"];
 function parseEnvList(env) {
   if (!env) {
     return [];
@@ -22,7 +22,7 @@ var checkRateLimit = require('./lib/rate-limit')(process.env.CORSANYWHERE_RATELI
 var cors_proxy = require('./lib/cors-anywhere');
 cors_proxy.createServer({
   originBlacklist: originBlacklist,
-  originWhitelist: [],
+  originWhitelist,
   requireHeader: [],
   checkRateLimit: checkRateLimit,
   removeHeaders: [
